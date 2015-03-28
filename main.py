@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-target = []
+targets = []
 world = []
 
 
@@ -23,7 +23,7 @@ with open("final_round.in", "r") as f:
     print("start_x=%s start_y=%s" % (start_x, start_y))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
-        target.append((CI, RI))
+        targets.append((CI, RI))
     for j in range(0, A):
         altitude = []
         for tmp1 in range(0, C):
@@ -42,8 +42,8 @@ with open("final_round.in", "r") as f:
         world.append(altitude)
 
 
-print(world)
-
+#print(world)
+print(targets)
 
 #with open("output.txt", "w") as text_file:
 #    for s in tab:
