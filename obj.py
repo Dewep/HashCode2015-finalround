@@ -3,7 +3,7 @@ __author__ = 'steven'
 from case import Case, Vector
 
 class Balloon(object):
-    def __init__(self, _id, current_case, target):
+    def __init__(self, _id, current_case, target=0):
         self.alt = 0
         self.current_case = current_case
         self.movements = []

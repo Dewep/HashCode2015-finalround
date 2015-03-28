@@ -29,7 +29,7 @@ with open("final_round.in", "r") as f:
     print("nb_targets=%s radius=%s nb_balloons=%s nb_tours=%s" % (L, V, B, T))
     print("start_x=%s start_y=%s" % (start_x, start_y))
     for b in range(0, nb_balloons):
-        balloons.append(Balloon(b, None))
+        balloons.append(Balloon(b, None, int(b * max_y / nb_balloons)))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
         targets.append((CI, RI))
