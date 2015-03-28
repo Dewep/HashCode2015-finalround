@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from obj import Balloon
+from case import Case
 
 targets = []
 world = []
@@ -51,22 +52,50 @@ world_cases = []
 
 
 altitude = 1
+world_cases.append([]) # altitude 0
 for level in world:
     world_cases.append([])
     for x in range(0, C):
-        world_cases[altitude - 1].append([])
+        world_cases[altitude].append([])
         for y in range(0, R):
-            pass
-            
-            #world_cases[altitude] =
-
+            world_cases[altitude][x].append(Case(x, y, altitude, world[altitude - 1][x][y]))
     # penser a wrap le monde
 
     altitude += 1
 
 # fonction d'output
 
+def display_world():
+    alt = 0
+    for level in world_cases:
+        print("Altitude %s" % (alt))
+        for x in range(0, C):
+            if x < len(world_cases[alt]):
+                for y in range(0, R):
+                    if y < len(world_cases[alt][x]):
+                        print("(x:%s, y:%s): %s" % (x, y, world_cases[alt][x][y]))
+        alt += 1
+
+
+def map_world():
+    alt = 0
+    for level in world_cases:
+        print("Altitude %s" % (alt))
+        for x in range(0, C):
+            if x < len(world_cases[alt]):
+                for y in range(0, R):
+                    if y < len(world_cases[alt][x]):
+                        obj = world_cases[alt][x][y]
+                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][(y + obj.move.y) % max_y]
+                        if alt > 1:
+                            obj.down = world_cases[alt - 1][x][y]
+                        if alt + 1 < max_altitude:
+                            obj.up = world_cases[alt + 1][x][y]
+        alt += 1
+
 #print(world)
+map_world()
+display_world()
 
 #print(targets)
 
