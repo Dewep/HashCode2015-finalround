@@ -52,7 +52,11 @@ with open("final_round.in", "r") as f:
 
 print(targets)
 print('NUMBER OF BALLONS', B)
-locator = Locator()
+locator = Locator(targets, nb_ballons, radius, map_x, map_y)
+best_targets = locator.get_best_targets_list()
+print(best_targets)
+is_covered = locator.is_target_covered_by_balloon((8, 8), (19, 10), max_x)
+print(is_covered)
 #with open("output.txt", "w") as text_file:
 #    for s in tab:
 #        print(s, file=text_file)
