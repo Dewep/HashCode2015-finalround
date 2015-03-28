@@ -129,11 +129,13 @@ def search_path(ballon):
 
 i = 0
 for ballon in balloons:
-    if i == 2:
-        ballon.current_case = copy(world_cases[1][start_x][start_y])
-        ballon.movements.append(1)
-    else:
-        ballon.movements.append(0)
+    ballon.current_case = copy(world_cases[1][start_x][start_y])
+    ballon.movements.append(1)
+    #if i == 2:
+    #    ballon.current_case = copy(world_cases[1][start_x][start_y])
+    #    ballon.movements.append(1)
+    #else:
+    #    ballon.movements.append(0)
     print("%s : target: %s" % (i, ballon.target))
     i += 1
 # lancer les ballons avant puis imaginer un décalage
