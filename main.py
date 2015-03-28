@@ -32,7 +32,14 @@ with open("final_round.in", "r") as f:
         world.append(altitude)
 
 
+
+
+
+
+# fonction d'output
+
 #print(world)
+
 print(targets)
 
 #with open("output.txt", "w") as text_file:
