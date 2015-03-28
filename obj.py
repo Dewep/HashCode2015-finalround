@@ -25,6 +25,12 @@ class Balloon(object):
     def move2(self, move):
         self.alt += move
         self.movements.append(move)
+        if move == 1:
+            self.current_case = self.current_case.up.next
+        if move == 0:
+            self.current_case = self.current_case.next
+        if move == -1:
+            self.current_case = self.current_case.down.next
 
     def __str__(self):
         return "alt(%s),  current(%s), movements(%s)" % (str(self.alt), self.current_case, " ".join(self.movements))

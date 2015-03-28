@@ -150,8 +150,8 @@ for i in range(0, nb_tours):
         found = False
         if not ballon.current_case:
             continue
-        print("ROUND   ---- %s " % (i))
-        print("avant de bouger: ballon %s" % (ballon.current_case))
+        #print("ROUND   ---- %s " % (i))
+        #print("avant de bouger: ballon %s" % (ballon.current_case))
         #target = locator.get_next_position((ballon.current_case.x, ballon.current_case.y))
         #if target[1] < 6:
         #    target = (target[0], 6)
