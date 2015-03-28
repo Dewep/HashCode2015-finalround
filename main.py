@@ -184,6 +184,8 @@ for y in range(0, max_y):
             color(1)
         elif (x, y) in best_targets:
             color(2)
+        else:
+            color(None)
         print(" ", end="")
     print("")
 color(None)
