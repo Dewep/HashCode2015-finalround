@@ -14,12 +14,12 @@ with open("final_round.in", "r") as f:
     max_altitude = A
     nb_targets = L
     radius = V
-    nb_ballons = B
+    nb_balloons = B
     nb_tours = T
     start_x = CS
     start_y = RS
     print("max_y=%s max_x=%s max_altitude=%s" % (R, C, A))
-    print("nb_targets=%s radius=%s nb_ballons=%s nb_tours=%s" % (L, V, B, T))
+    print("nb_targets=%s radius=%s nb_balloons=%s nb_tours=%s" % (L, V, B, T))
     print("start_x=%s start_y=%s" % (start_x, start_y))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
