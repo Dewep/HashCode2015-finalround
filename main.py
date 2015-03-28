@@ -13,7 +13,7 @@ with open("final_round.in", "r") as f:
     print("%s %s %s %s" % (L, V, B, T))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
-        target.append((RI, CI))
+        target.append((CI, RI))
     for j in range(0, A):
         altitude = []
         for tmp1 in range(0, C):
@@ -23,20 +23,18 @@ with open("final_round.in", "r") as f:
             altitude.append(tab)
         for y in range(0, R):
             vectors = list(map(int, f.readline().split()))
-            #print(len(vectors))
             index = 0
             x = 0
             while x < C:
                 altitude[x][y] = (vectors[index + 1], vectors[index])
                 index += 2
                 x += 1
-            #print(altitude)
         world.append(altitude)
 
 
 print(world)
 
 
-with open("output.txt", "w") as text_file:
-    for s in tab:
-        print(s, file=text_file)
+#with open("output.txt", "w") as text_file:
+#    for s in tab:
+#        print(s, file=text_file)
