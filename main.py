@@ -68,8 +68,11 @@ for level in world:
 
 #print(world)
 
-print(targets)
+#print(targets)
 
 with open("result.txt", "w") as text_file:
-    for b in balloons:
-        print(" ".join([str(o) for o in b.movements]), file=text_file)
+    for t in range(0, nb_tours):
+        res = []
+        for b in range(0, nb_balloons):
+            res.append(str(balloons[b].movements[t]))
+        print(" ".join(res), file=text_file)
