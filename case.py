@@ -19,7 +19,7 @@ class Case(object):
         self.down = None
         self.next = None
         self.visited = False
-        self.dist = 100000
+        self.dist =
 
     def aff_simple(self):
         return "x(%s), y(%s), alt(%s)" % (self.x, self.y, self.alt)

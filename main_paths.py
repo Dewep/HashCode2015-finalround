@@ -155,6 +155,7 @@ for i in range(0, nb_tours):
         found = False
         if not ballon.current_case:
             continue
+        #ballon.target
         for target in targets:
             movement = search_path(ballon.current_case, target)
             print("move: %s" % (movement))
