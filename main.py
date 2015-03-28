@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+from locator import Locator
 
 targets = []
 world = []
@@ -34,7 +34,8 @@ with open("final_round.in", "r") as f:
 
 #print(world)
 print(targets)
-
+print('NUMBER OF BALLONS', B)
+locator = Locator()
 #with open("output.txt", "w") as text_file:
 #    for s in tab:
 #        print(s, file=text_file)
