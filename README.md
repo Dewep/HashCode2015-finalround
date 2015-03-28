@@ -1,2 +1,6 @@
-# HashCode2015-finalround
-Hash Code 2015 final round
+# HashCode2015
+
+- Martins Stevens
+- Nucera Alexandre
+- Sbrissa Théo
+- Maigret Aurélien
