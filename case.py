@@ -19,6 +19,9 @@ class Case(object):
         self.down = None
         self.next = None
 
+    def __str__(self):
+        return "x(%s), y(%s), alt(%s), vector(%s), up(%s), down(%s), next(%s)" % (self.x, self.y, self.alt, self.move, self.up, self.down, self.next)
+
 # penser à wrapper la map
 
 
