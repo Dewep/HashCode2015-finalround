@@ -93,9 +93,12 @@ def map_world():
                             obj.up = world_cases[alt + 1][x][y]
         alt += 1
 
+#set case de depart de chaque ballon
+#map une altitude 0
 #print(world)
 map_world()
 display_world()
+
 
 print(targets)
 
