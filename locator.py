@@ -68,3 +68,15 @@ class Locator(object):
 
     def _column_dist(self, balloon_x, target_x):
         return min(math.fabs(balloon_x - target_x), self.map_x - math.fabs(balloon_x - target_x))
+
+    def get_next_position(self, balloon):
+        (balloon_x, balloon_y) = balloon
+        best_targets_list = self.get_best_targets_list()
+        shortest_distance = 1000000
+        shortest_target = None
+        for target in best_targets_list:
+            distance = (target[0] - balloon_x + self.map_x) % self.map_x
+            if 0 < distance < shortest_distance:
+                shortest_distance = distance
+                shortest_target = target
+        return shortest_target
