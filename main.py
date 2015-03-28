@@ -9,8 +9,18 @@ with open("final_round.in", "r") as f:
     R, C, A = map(int, f.readline().split())
     L, V, B, T = map(int, f.readline().split())
     RS, CS = map(int, f.readline().split())
-    print("%s %s %s" % (R, C, A))
-    print("%s %s %s %s" % (L, V, B, T))
+    max_y = R
+    max_x = C
+    max_altitude = A
+    nb_targets = L
+    radius = V
+    nb_ballons = B
+    nb_tours = T
+    start_x = CS
+    start_y = RS
+    print("max_y=%s max_x=%s max_altitude=%s" % (R, C, A))
+    print("nb_targets=%s radius=%s nb_ballons=%s nb_tours=%s" % (L, V, B, T))
+    print("start_x=%s start_y=%s" % (start_x, start_y))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
         targets.append((CI, RI))
@@ -32,7 +42,14 @@ with open("final_round.in", "r") as f:
         world.append(altitude)
 
 
+
+
+
+
+# fonction d'output
+
 #print(world)
+
 print(targets)
 print('NUMBER OF BALLONS', B)
 locator = Locator()
