@@ -92,7 +92,7 @@ def map_world():
                 for y in range(0, R):
                     if y < len(world_cases[alt][x]):
                         obj = world_cases[alt][x][y]
-                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y else None
+                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y and (y + obj.move.y) >= 0 else None
                         if alt > 1:
                             obj.down = world_cases[alt - 1][x][y]
                         if alt + 1 < max_altitude:
@@ -119,15 +119,21 @@ def search_path(ballon):
         return ballon.current_case.down
     if dist_up == result:
         return ballon.current_case.up
-    return ballon.current_case
+    if ballon.current_case.next.y >= 0 or ballon.current_case.next.y < max_y:
+        return ballon.current_case
+    if ballon.current_case.down.next.y >= 0 or ballon.current_case.down.next.y < max_y:
+        return ballon.current_case.down
+    if ballon.current_case.up.next.y >= 0 or ballon.current_case.up.next.y < max_y:
+        return ballon.current_case.up
+    return None
 
 i = 0
 for ballon in balloons:
-    #if i == 0:
-    ballon.current_case = copy(world_cases[1][start_x][start_y])
-    ballon.movements.append(1)
-    #else:
-    #    ballon.movements.append(0)
+    if i == 2:
+        ballon.current_case = copy(world_cases[1][start_x][start_y])
+        ballon.movements.append(1)
+    else:
+        ballon.movements.append(0)
     print("%s : target: %s" % (i, ballon.target))
     i += 1
 # lancer les ballons avant puis imaginer un décalage
@@ -139,6 +145,7 @@ for i in range(0, nb_tours):
         found = False
         if not ballon.current_case:
             continue
+        print("ROUND   ---- %s " % (i))
         print("avant de bouger: ballon %s" % (ballon.current_case))
         movement = search_path(ballon)
         print("move: %s" % (movement))
