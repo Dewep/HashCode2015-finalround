@@ -1,19 +1,40 @@
 #!/usr/bin/env python3
 
 
-tab = []
+target = []
+world = []
 
 
 with open("final_round.in", "r") as f:
-    R, C, H, S = map(int, f.readline().split())
-    print("%s %s %s %s" % (R, C, H, S))
-    for line in f:
-        l = line.replace('\r', '').replace('\n', '')
-        print("[%s]" % l)
-        tab.append(l)
+    R, C, A = map(int, f.readline().split())
+    L, V, B, T = map(int, f.readline().split())
+    RS, CS = map(int, f.readline().split())
+    print("%s %s %s" % (R, C, A))
+    print("%s %s %s %s" % (L, V, B, T))
+    for i in range(0, L):
+        RI, CI = map(int, f.readline().split())
+        target.append((RI, CI))
+    for j in range(0, A):
+        altitude = []
+        for tmp1 in range(0, C):
+            tab = []
+            for tmp2 in range(0, R):
+                tab.append(None)
+            altitude.append(tab)
+        for y in range(0, R):
+            vectors = list(map(int, f.readline().split()))
+            #print(len(vectors))
+            index = 0
+            x = 0
+            while x < C:
+                altitude[x][y] = (vectors[index + 1], vectors[index])
+                index += 2
+                x += 1
+            #print(altitude)
+        world.append(altitude)
 
 
-print(tab)
+print(world)
 
 
 with open("output.txt", "w") as text_file:
