@@ -103,7 +103,23 @@ map_world()
 #print(targets)
 
 locator = Locator(targets, nb_balloons, radius, max_x, max_y)
-print(locator.get_best_targets_list())
+best_targets = locator.get_best_targets_list()
+print(best_targets)
+
+"""
+from tools import color
+for y in range(0, max_y):
+    for x in range(0, max_x):
+        if (x, y) in targets and (x, y) in best_targets:
+            color(3)
+        elif (x, y) in targets:
+            color(1)
+        elif (x, y) in best_targets:
+            color(2)
+        print(" ", end="")
+    print("")
+color(None)
+"""
 
 with open("result.txt", "w") as text_file:
     for t in range(0, nb_tours):
