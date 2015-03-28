@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from locator import Locator
 
 from obj import Balloon
 from case import Case
@@ -100,7 +101,12 @@ map_world()
 #display_world()
 
 #print(targets)
-
+print('NUMBER OF BALLONS', B)
+locator = Locator(targets, nb_ballons, radius, map_x, map_y)
+best_targets = locator.get_best_targets_list()
+print(best_targets)
+is_covered = locator.is_target_covered_by_balloon((8, 8), (19, 10), max_x)
+print(is_covered)
 with open("result.txt", "w") as text_file:
     for t in range(0, nb_tours):
         res = []
