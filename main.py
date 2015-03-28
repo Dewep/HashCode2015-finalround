@@ -56,7 +56,9 @@ for level in world:
     for x in range(0, C):
         world_cases[altitude - 1].append([])
         for y in range(0, R):
-            world_cases[altitude] =
+            pass
+            
+            #world_cases[altitude] =
 
     # penser a wrap le monde
 
