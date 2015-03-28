@@ -77,8 +77,24 @@ def display_world():
         alt += 1
 
 
-#print(world)
+def map_world():
+    alt = 0
+    for level in world_cases:
+        print("Altitude %s" % (alt))
+        for x in range(0, C):
+            if x < len(world_cases[alt]):
+                for y in range(0, R):
+                    if y < len(world_cases[alt][x]):
+                        obj = world_cases[alt][x][y]
+                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][(y + obj.move.y) % max_y]
+                        if alt > 1:
+                            obj.down = world_cases[alt - 1][x][y]
+                        if alt + 1 < max_altitude:
+                            obj.up = world_cases[alt + 1][x][y]
+        alt += 1
 
+#print(world)
+map_world()
 display_world()
 
 print(targets)
