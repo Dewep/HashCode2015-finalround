@@ -1,5 +1,7 @@
 __author__ = 'steven'
 
+import sys
+
 class Vector(object):
     def __init__(self, x, y):
         self.x = x
@@ -19,7 +21,7 @@ class Case(object):
         self.down = None
         self.next = None
         self.visited = False
-        self.dist =
+        self.dist = sys.maxsize
 
     def aff_simple(self):
         return "x(%s), y(%s), alt(%s)" % (self.x, self.y, self.alt)
