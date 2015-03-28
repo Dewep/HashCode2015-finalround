@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+from obj import Balloon
 
 targets = []
 world = []
+balloons = []
 
 
 with open("final_round.in", "r") as f:
@@ -21,6 +23,8 @@ with open("final_round.in", "r") as f:
     print("max_y=%s max_x=%s max_altitude=%s" % (R, C, A))
     print("nb_targets=%s radius=%s nb_balloons=%s nb_tours=%s" % (L, V, B, T))
     print("start_x=%s start_y=%s" % (start_x, start_y))
+    for b in range(0, nb_balloons):
+        balloons.append(Balloon(b, None))
     for i in range(0, L):
         RI, CI = map(int, f.readline().split())
         targets.append((CI, RI))
@@ -52,6 +56,6 @@ with open("final_round.in", "r") as f:
 
 print(targets)
 
-#with open("output.txt", "w") as text_file:
-#    for s in tab:
-#        print(s, file=text_file)
+with open("result.txt", "w") as text_file:
+    for b in balloons:
+        print(" ".join([str(o) for o in b.movements]), file=text_file)
