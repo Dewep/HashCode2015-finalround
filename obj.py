@@ -19,7 +19,8 @@ class Balloon(object):
         if self.current_case.next == movement:
             move = 0
         self.movements.append(move)
-        self.current_case = movement
+        print(movement)
+        self.current_case = movement.next
 
     def __str__(self):
         return "alt(%s),  current(%s), movements(%s)" % (self.alt, self.current_case, " ".join(self.movements))

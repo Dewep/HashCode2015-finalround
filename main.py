@@ -91,6 +91,7 @@ def map_world():
                     if y < len(world_cases[alt][x]):
                         obj = world_cases[alt][x][y]
                         obj.next = world_cases[alt][(x + obj.move.x) % max_x][y] if y < max_y else None
+                        #obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y else None
                         if alt > 1:
                             obj.down = world_cases[alt - 1][x][y]
                         if alt + 1 < max_altitude:
@@ -141,6 +142,10 @@ def search_path(start, goal):
         return node.next
     return None
 
+locator = Locator(targets, nb_balloons, radius, max_x, max_y)
+best_targets = locator.get_best_targets_list()
+print(best_targets)
+
 i = 0
 for ballon in balloons:
     if i == 0:
@@ -151,11 +156,19 @@ for ballon in balloons:
     i += 1
 # lancer les ballons avant puis imaginer un décalage
 for i in range(0, nb_tours):
+    print("TOUR=====", i)
+    add = False
     for ballon in balloons:
         found = False
         if not ballon.current_case:
+            if not add:
+                add = True
+                ballon.current_case = world_cases[1][start_x][start_y]
+                ballon.movements.append(1)
+            else:
+                ballon.movements.append(1)
             continue
-        for target in targets:
+        """for target in targets:
             movement = search_path(ballon.current_case, target)
             print("move: %s" % (movement))
             if movement:
@@ -165,12 +178,14 @@ for i in range(0, nb_tours):
         if not found:
             print("Damn")
             ballon.move(None)
+        """
+        objectif_x, objectif_y = locator.get_next_position((ballon.current_case.x, ballon.current_case.y))
+        print("OBJECTIF: %s:%s => %s:%s" % (ballon.current_case.x, ballon.current_case.y, objectif_x, objectif_y))
+        movement = search_path(ballon.current_case, (objectif_x, objectif_y))
+        print("move: %s" % (movement))
+        ballon.move(movement)
 
 #print(targets)
-
-locator = Locator(targets, nb_balloons, radius, max_x, max_y)
-best_targets = locator.get_best_targets_list()
-print(best_targets)
 
 """
 from tools import color
