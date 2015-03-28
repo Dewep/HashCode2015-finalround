@@ -42,9 +42,21 @@ with open("final_round.in", "r") as f:
         world.append(altitude)
 
 
+world_cases = []
 
 
 
+altitude = 1
+for level in world:
+    world_cases.append([])
+    for x in range(0, C):
+        world_cases[altitude - 1].append([])
+        for y in range(0, R):
+            world_cases[altitude] =
+
+    # penser a wrap le monde
+
+    altitude += 1
 
 # fonction d'output
 
