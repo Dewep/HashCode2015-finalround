@@ -16,6 +16,6 @@ with open("test_round.in", "r") as f:
 print(tab)
 
 
-with open("output.csv", "w") as text_file:
+with open("output.txt", "w") as text_file:
     for s in tab:
         print(s, file=text_file)
