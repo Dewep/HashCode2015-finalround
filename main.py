@@ -90,8 +90,7 @@ def map_world():
                 for y in range(0, R):
                     if y < len(world_cases[alt][x]):
                         obj = world_cases[alt][x][y]
-                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][y] if y < max_y else None
-                        #obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y else None
+                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y and (y + obj.move.y) >= 0 else None
                         if alt > 1:
                             obj.down = world_cases[alt - 1][x][y]
                         if alt + 1 < max_altitude:
@@ -109,6 +108,7 @@ def get_dist(visited, actual, target, prev_dist):
     #print("Visited: %s" % (str(visited)))
     #if actual.x == target[0] and actual.y == target[1]:
     #    return 0
+
     unvisited = [] # a prioriser
     if actual.up:
         unvisited.append(actual.up)
@@ -117,6 +117,9 @@ def get_dist(visited, actual, target, prev_dist):
     if actual.next:
         unvisited.append(actual.next)
     current_dist = math.sqrt(math.pow(abs(actual.x - target[0]), 2) + math.pow(abs(actual.y - target[1]), 2))
+    #print("current_dist: %s" % current_dist)
+    if prev_dist < current_dist:
+        return prev_dist
     for item in unvisited:
         new_dist = get_dist(visited, item, target, current_dist)
         if new_dist < current_dist:
@@ -148,25 +151,23 @@ print(best_targets)
 
 i = 0
 for ballon in balloons:
-    if i == 0:
-        ballon.current_case = world_cases[1][start_x][start_y]
-        ballon.movements.append(1)
-    else:
-        ballon.movements.append(0)
+    #if i == 51:
+    ballon.current_case = world_cases[1][start_x][start_y]
+    ballon.movements.append(1)
+    #else:
+    #    ballon.movements.append(0)
     i += 1
 # lancer les ballons avant puis imaginer un décalage
 for i in range(0, nb_tours):
     print("TOUR=====", i)
     add = False
+    #if i < len(balloons) and not balloons[i].current_case:
+    #    balloons[i].current_case = world_cases[1][start_x][start_y]
+    #    ballon.movements.append(1)
     for ballon in balloons:
         found = False
         if not ballon.current_case:
-            if not add:
-                add = True
-                ballon.current_case = world_cases[1][start_x][start_y]
-                ballon.movements.append(1)
-            else:
-                ballon.movements.append(1)
+            ballon.move(None)
             continue
         """for target in targets:
             movement = search_path(ballon.current_case, target)

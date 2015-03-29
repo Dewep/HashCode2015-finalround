@@ -11,7 +11,11 @@ class Balloon(object):
         self.target = target
 
     def move(self, movement):
-        move = -42
+        #move = -42
+        move = 0
+        if not self.current_case:
+            self.movements.append(0)
+            return
         if self.current_case.up == movement:
             move = 1
         if self.current_case.down == movement:
