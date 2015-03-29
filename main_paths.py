@@ -88,15 +88,15 @@ def map_world():
     for level in world_cases:
         print("Altitude %s" % (alt))
         for x in range(0, C):
-            if x < len(world_cases[alt]):
+            if alt > 0:
                 for y in range(0, R):
-                    if y < len(world_cases[alt][x]):
-                        obj = world_cases[alt][x][y]
-                        obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y and (y + obj.move.y) >= 0 else None
-                        if alt > 1:
-                            obj.down = world_cases[alt - 1][x][y]
-                        if alt + 1 < max_altitude:
-                            obj.up = world_cases[alt + 1][x][y]
+                    #if y < len(world_cases[alt][x]):
+                    obj = world_cases[alt][x][y]
+                    obj.next = world_cases[alt][(x + obj.move.x) % max_x][y + obj.move.y] if (y + obj.move.y) < max_y and (y + obj.move.y) >= 0 else None
+                    if alt > 1:
+                        obj.down = world_cases[alt - 1][x][y]
+                    if alt + 1 < max_altitude:
+                        obj.up = world_cases[alt + 1][x][y]
         alt += 1
 
 map_world()
@@ -129,32 +129,43 @@ def search_path(ballon):
 
 i = 0
 for ballon in balloons:
-    if i == 2:
-        ballon.current_case = copy(world_cases[1][start_x][start_y])
-        ballon.movements.append(1)
-    else:
-        ballon.movements.append(0)
+    ballon.current_case = copy(world_cases[1][start_x][start_y])
+    ballon.movements.append(1)
+    #if i == 2:
+    #    ballon.current_case = copy(world_cases[1][start_x][start_y])
+    #    ballon.movements.append(1)
+    #else:
+    #    ballon.movements.append(0)
     print("%s : target: %s" % (i, ballon.target))
     i += 1
 # lancer les ballons avant puis imaginer un décalage
 print(balloons)
 
 
+locator = Locator(targets, nb_balloons, radius, max_x, max_y)
+print(locator.get_best_targets_list())
+
 for i in range(0, nb_tours):
     for ballon in balloons:
         found = False
         if not ballon.current_case:
             continue
-        print("ROUND   ---- %s " % (i))
-        print("avant de bouger: ballon %s" % (ballon.current_case))
-        movement = search_path(ballon)
-        print("move: %s" % (movement))
-        if movement:
-            ballon.move(movement)
+        #print("ROUND   ---- %s " % (i))
+        #print("avant de bouger: ballon %s" % (ballon.current_case))
+        #target = locator.get_next_position((ballon.current_case.x, ballon.current_case.y))
+        #if target[1] < 6:
+        #    target = (target[0], 6)
+        #ballon.target = target[1]
+        #movement = search_path(ballon)
+        #print("move: %s" % (movement))
+        moves = [0]
+        if ballon.alt > 1:
+            moves.append(-1)
+        if ballon.alt < max_altitude - 1:
+            moves.append(1)
+        from random import randint
+        ballon.move2(moves[randint(0, len(moves) - 1)])
 #print(targets)
-
-locator = Locator(targets, nb_balloons, radius, max_x, max_y)
-print(locator.get_best_targets_list())
 
 with open("result.txt", "w") as text_file:
     for t in range(0, nb_tours):
